@@ -16,26 +16,10 @@ namespace Vidly.Controllers
             return RedirectToAction("Index", "Home", new {page = 1, sortBy = "name"});
         }
 
-        public ActionResult Edit(int movieId)
-        {
-            return Content("id=" + movieId);
-        }
-
-        //movies
-        public ActionResult Index(int? pageIndex, string sortBy)
-        {
-            if (!pageIndex.HasValue)
-                pageIndex = 1;
-            if (String.IsNullOrWhiteSpace(sortBy))
-                sortBy = "Name";
-
-            return Content($"pageIndex={pageIndex}&sortBy={sortBy}");
-        }
-
         //Get: Movies/Random
         public ActionResult ByReleaseDate(int year, int month)
         {
-            return Content(year+"/"+month);
+            return Content(year+ "/" + month);
         }
     }
 }

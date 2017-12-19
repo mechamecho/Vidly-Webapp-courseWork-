@@ -10,13 +10,10 @@ namespace Vidly.Controllers
         public ActionResult Random()
         {   
             var movie = new Movie() {Name = "Shrek!"};
-//            return View(movie);
-//            return HttpNotFound();
-//            return new EmptyResult();
-            return RedirectToAction("Index", "Home", new {page = 1, sortBy = "name"});
+            return View(movie);
         }
 
-        //Get: Movies/Random
+        [Route("movies/released/{year:regex(//d{4})/month:regex(//d{2}):range(1,12)}")]
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year+ "/" + month);

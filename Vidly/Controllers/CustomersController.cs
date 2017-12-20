@@ -7,30 +7,39 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
+        private ApplicationDbContext _context;
+
+        //To initialize the ApplicationDbContext 
+        public CustomersController()
+        {
+            _context=new ApplicationDbContext();
+            
+        }
+
+        //To dispose of the ApplicationDbContext instance
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         public ViewResult Index()
         {
-            var customers = GetCustomers();
+            //Grabs the customers from the Database, we called the ToList() method to immediately execute
+            //the query
+            var customers = _context.Customers.ToList();
 
             return View(customers);
         }
 
         public ActionResult Details(int id)
         {
-            var customer = GetCustomers().SingleOrDefault(c => c.Id == id);
+            //The query will be immediately executed because of the SingleOrDefault extension method
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return HttpNotFound();
 
             return View(customer);
-        }
-
-        private IEnumerable<Customer> GetCustomers()
-        {
-            return new List<Customer>
-            {
-                new Customer { Id = 1, Name = "Nafissa Hassan" },
-                new Customer { Id = 2, Name = "Louis Caballer" }
-            };
         }
     }
 }

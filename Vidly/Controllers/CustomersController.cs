@@ -27,8 +27,7 @@ namespace Vidly.Controllers
         {
             //Grabs the customers from the Database, we called the ToList() method to immediately execute
             //the query
-            var customers = _context.Customers.Include(c=>c.MembershipType).ToList();
-
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
             return View(customers);
         }
 

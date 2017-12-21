@@ -12,7 +12,8 @@ namespace Vidly.Models
         {
             var customer = (Customer) validationContext.ObjectInstance;
 
-            if (customer.MembershipTypeId==0||customer.MembershipTypeId == 1)
+            if (customer.MembershipTypeId==MembershipType.Unknown||
+                customer.MembershipTypeId == MembershipType.PayAsYouGo)
             {
                 //Success is a static field of the ValidationResult class
                 return ValidationResult.Success;

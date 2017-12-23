@@ -29,6 +29,32 @@ namespace Vidly.Controllers
             return View(movies);
         }
 
+        public ViewResult New()
+        {
+            var genres = _context.Genres.ToList();
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+            return View("MovieForm", viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new MovieFormViewModel(movie)
+            {
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
         public ActionResult Details(int id)
         {
             var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
@@ -39,7 +65,6 @@ namespace Vidly.Controllers
             return View(movie);
 
         }
-
 
         // GET: Movies/Random
         public ActionResult Random()
@@ -60,36 +85,20 @@ namespace Vidly.Controllers
             return View(viewModel);
         }
 
-        public ActionResult New()
-        {
-            var genres = _context.Genres.ToList();
-            var viewModel= new MovieFormViewModel
-            {
-                Genres=genres
-            };
-            return View("MovieForm", viewModel);
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
-            if (movie == null)
-            {
-                return HttpNotFound();
-            }
-
-            var viewModel = new MovieFormViewModel
-            {
-                Movie = movie,
-                Genres = _context.Genres.ToList()
-            };
-
-            return View("MovieForm", viewModel);
-        }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel(movie)
+                {
+                    Genres = _context.Genres.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;

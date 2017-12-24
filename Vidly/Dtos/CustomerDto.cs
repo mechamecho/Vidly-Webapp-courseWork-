@@ -16,6 +16,15 @@ namespace Vidly.Dtos
 
         public byte MembershipTypeId { get; set; }
 
+        //Bad practice because it would couple the Dto to the domain object
+        //It is better to create a seperate class called MembershipType Dto 
+        //Then map them in the Mapping Profile
+        //public MembershipType MembershipType { get; set; }
+        public MembershipTypeDto MembershipType { get; set; }
+
+
+
+
         //        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
     }

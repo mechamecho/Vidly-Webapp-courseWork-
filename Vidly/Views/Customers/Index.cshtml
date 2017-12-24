@@ -16,39 +16,53 @@
 }
 
 <h2>Customers</h2>
-@if (!Model.Any())
-{
-    <p>We don't have any customers yet.</p>
-}
-else
-{
-    <table id="customers" class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>Customer</th>
-            <th>Membership Type</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var customer in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
-                <td>@customer.MembershipType.Name</td>
-                <td>
-                    <button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
+
+@* We won't check if there are any customers here, but rather in the datable plugin part of
+    the code.*@
+<table id="customers" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Customer</th>
+        <th>Membership Type</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
 @section scripts{
     <script>
         //Makes sure the page is ready for DOM manipulation
         $(document).ready(function () {
-            $("#customers").DataTable();
+            $("#customers").DataTable({
+                ajax: {
+                    url: "/api/customers",
+                    //Because our Api response is an array of objects that represent the customer's information
+                    //If the Api response was containing an array of customers as a property, then we would have
+                    //to send it to that array, by giving the dataSrc attribute the string 
+                    dataSrc:""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, customer) {
+                            return "<a href='/customers/edit" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        //data shows the DataTable plugin where to get the data from 
+                        data:"name"
+                    },
+                    {
+                        data: "id",
+                        //renders each row in the table
+                        render: function(data) {
+                            return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
 
             $("#customers").on("click", ".js-delete", function () {
                 var button = $(this);

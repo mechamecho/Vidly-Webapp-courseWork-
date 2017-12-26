@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Vidly.Models.IdentityModels;
 
-namespace Vidly.Models
+namespace Vidly.Models.IdentityModels
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

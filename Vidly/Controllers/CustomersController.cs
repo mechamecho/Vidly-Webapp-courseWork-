@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
 using System.Data.Entity;
+using System.Runtime.Caching;
 using Vidly.Models.IdentityModels;
 using Vidly.ViewModels;
 
@@ -27,7 +29,14 @@ namespace Vidly.Controllers
         //We don't need the customer's list anymore, because the api provides it to the 
         //Client
         public ViewResult Index()
-        {            
+        {
+            //Genre field must be static, otherwise we need to instantiate 
+            //MemoryItem instance
+            if (MemoryCache.Default[MemoryCacheItems.Genre] == null)
+                MemoryCache.Default["Genres"] = _context.Genres.ToList();
+
+            var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
+
             return View();
         }
 

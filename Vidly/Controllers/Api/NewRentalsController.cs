@@ -17,7 +17,7 @@ namespace Vidly.Controllers.Api
         [HttpPost]
         public IHttpActionResult CreateNewRentals(NewRentalDto newRental)
         {
-            var customer = _context.Customers.Single(
+            var customer = _context.Customers.SingleOrDefault(
                 c => c.Id == newRental.CustomerId);
 
             if (newRental.MovieIds.Count == 0)

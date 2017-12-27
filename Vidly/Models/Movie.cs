@@ -26,5 +26,7 @@ namespace Vidly.Models
         [Display(Name="Videos in stock")]
         [Range(1, 20)]
         public byte NumberInStock { get; set; }
+
+        public byte NumberAvailable { get; set; }
     }
 }

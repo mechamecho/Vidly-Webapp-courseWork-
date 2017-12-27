@@ -309,6 +309,10 @@
     <Compile Include="Migrations\201712270423405_UndoRentalChanges.Designer.cs">
       <DependentUpon>201712270423405_UndoRentalChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712270437179_AddRental.cs" />
+    <Compile Include="Migrations\201712270437179_AddRental.Designer.cs">
+      <DependentUpon>201712270437179_AddRental.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Rental.cs" />
     <Compile Include="ViewModels\AccountViewModels\ForgotPasswordViewModel.cs" />
@@ -648,6 +652,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712270423405_UndoRentalChanges.resx">
       <DependentUpon>201712270423405_UndoRentalChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270437179_AddRental.resx">
+      <DependentUpon>201712270437179_AddRental.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

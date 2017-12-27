@@ -20,11 +20,25 @@ namespace Vidly.Controllers.Api
             var customer = _context.Customers.Single(
                 c => c.Id == newRental.CustomerId);
 
+            if (newRental.MovieIds.Count == 0)
+                return BadRequest("No movie Ids have been given");
+
+            if (customer == null)
+                return BadRequest("Customer Id is not Valid.");
+
             var movies = _context.Movies.Where(
-                m => newRental.MovieIds.Contains(m.Id));
+                m => newRental.MovieIds.Contains(m.Id)).ToList();
+
+            if (movies.Count != newRental.MovieIds.Count)
+                return BadRequest("One or MovieIds are invalid.");
 
             foreach (var movie in movies)
             {
+                if (movie.NumberAvailable == 0)
+                    return BadRequest("This movie is currently not available");
+
+                movie.NumberAvailable--;
+
                 var rental = new Rental
                 {
                     Customer = customer,

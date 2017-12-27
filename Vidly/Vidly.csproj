@@ -310,6 +310,7 @@
       <DependentUpon>201712270423405_UndoRentalChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="ViewModels\AccountViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Genre.cs" />

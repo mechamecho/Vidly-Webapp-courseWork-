@@ -30,12 +30,15 @@ namespace Vidly.Controllers
         //Client
         public ViewResult Index()
         {
-            //Genre field must be static, otherwise we need to instantiate 
-            //MemoryItem instance
-            if (MemoryCache.Default[MemoryCacheItems.Genre] == null)
-                MemoryCache.Default["Genres"] = _context.Genres.ToList();
+            //Removing Caching because it can lead to problems with EF and 
+            //is only encouraged for view related objects
 
-            var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
+            ////Genre field must be static, otherwise we need to instantiate 
+            ////MemoryItem instance
+            //if (MemoryCache.Default[MemoryCacheItems.Genre] == null)
+            //    MemoryCache.Default["Genres"] = _context.Genres.ToList();
+
+            //var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
 
             return View();
         }

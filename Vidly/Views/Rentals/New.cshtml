@@ -73,7 +73,7 @@
 
         }).on("typeahead:select", function (e, movie) {
             //modifies Dom elements directly
-            $("#movies").append("<li>" + movie.name + "</li>");
+            $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
 
             $("#movie").typeahead("val", "");
 

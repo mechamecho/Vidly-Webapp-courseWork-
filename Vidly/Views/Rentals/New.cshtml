@@ -23,7 +23,10 @@
 @section scripts
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            //stands for viewmodel, to save the customers selected
+            var vm = {};
+
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -41,6 +44,8 @@
                 display: 'name',
                 source: customers
             });
+        }).on("typeahead:select", function(e, customer) {
+            vm.customerId = customer.id;
         });
     </script>
 }

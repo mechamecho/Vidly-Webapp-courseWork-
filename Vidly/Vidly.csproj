@@ -222,6 +222,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CustomersController.cs" />
     <Compile Include="Controllers\Api\MoviesController.cs" />
+    <Compile Include="Controllers\Api\NewRentalsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MembershipTypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
+    <Compile Include="Dtos\NewRentalDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -302,6 +304,10 @@
     <Compile Include="Migrations\201712262004399_AddPhoneToApplicationUser.cs" />
     <Compile Include="Migrations\201712262004399_AddPhoneToApplicationUser.Designer.cs">
       <DependentUpon>201712262004399_AddPhoneToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270423405_UndoRentalChanges.cs" />
+    <Compile Include="Migrations\201712270423405_UndoRentalChanges.Designer.cs">
+      <DependentUpon>201712270423405_UndoRentalChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels\ForgotPasswordViewModel.cs" />
@@ -638,6 +644,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712262004399_AddPhoneToApplicationUser.resx">
       <DependentUpon>201712262004399_AddPhoneToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270423405_UndoRentalChanges.resx">
+      <DependentUpon>201712270423405_UndoRentalChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

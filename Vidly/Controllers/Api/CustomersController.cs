@@ -19,13 +19,18 @@ namespace Vidly.Controllers.Api
         }
 
         // GET /api/customers
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query=null)
         {
             //To Include the membership type in the datatable, we must load it from the database
-            var customerDtos = _context.Customers
-                .Include(c=>c.MembershipType)
-                .ToList()
+            var customersQuery = _context.Customers
+                .Include(c=>c.MembershipType);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+
+            var customerDtos = customersQuery.ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
+
 
             return Ok(customerDtos);
         }
